@@ -30,9 +30,9 @@ function load_desc() {
  * - Recharge les barres
  * - réinitialise les compteurs
  */
-function reload_bars() {
+function reload_bars(n = range.value) {
     buttons({disable: false});
-    B.reload();
+    B.reload(n);
     compare.innerHTML = 0;
     replace.innerHTML = 0;
 }
@@ -68,4 +68,33 @@ function source(name) {
     let inc = document.createElement('script');
     inc.src = `js/Algos/${name}.js`;
     document.body.appendChild(inc);
+}
+
+/*
+ * Vérifie que le nombre n vérifie
+ * les restriction de l'algorithme par exemple
+ * Bitonic Sort requière que n => 2**x, xeN
+ */
+function valid_range(n) {
+    return eval(`${get_algo()}.valid(${n})`);
+}
+
+/*
+ * Cherche la valeur la plus proche qui respècte
+ * les contraintes données par valid_range(n)
+ */
+function search_valid_range() {
+    let n = parseInt(range.value),
+        r = range.value == range.max ? false : n + 1,
+        l = range.value == range.min ? false : n - 1;
+    while (!valid_range(r) && !valid_range(l)) {
+        if (!r) {
+            l--;
+        } else if (!l) {
+            r++;
+        } else if (Math.abs(n - r) >= Math.abs(n - l)) {
+            l--;
+        } else r++;
+    }
+    return valid_range(r) ? r : l;
 }

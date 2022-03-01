@@ -1,4 +1,8 @@
 class BubbleSort {
+    static valid(n) {
+        return true;
+    }
+
     static async run() {
         let l = bars.length;
         for (let i = 0; i < l; i++) {

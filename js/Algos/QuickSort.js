@@ -1,4 +1,8 @@
 class QuickSort {
+    static valid(n) {
+        return true;
+    }
+
     static async run(left = 0, right = bars.length - 1) {
         if (left < right) {
             let p = left,
@@ -15,10 +19,10 @@ class QuickSort {
                 }
 
                 if (i < j) {
-                    await Sorting.replace(bars[i], bars[j]);
+                    await Sorting.swap(bars[i], bars[j]);
                 }
             }
-            await Sorting.replace(bars[p], bars[j]);
+            await Sorting.swap(bars[p], bars[j]);
             await this.run(left, j - 1);
             await this.run(j + 1, right);
         }

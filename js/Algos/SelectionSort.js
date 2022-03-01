@@ -1,4 +1,8 @@
 class SelectionSort {
+    static valid(n) {
+        return true;
+    }
+
     static async run() {
         let m,
             n = bars.length;
@@ -12,7 +16,7 @@ class SelectionSort {
                     return;
                 }
             }
-            await Sorting.replace(bars[i], bars[m], true);
+            await Sorting.swap(bars[i], bars[m], true);
         }
         new Promise((resolve, reject) => {
             resolve(bars);

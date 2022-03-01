@@ -1,7 +1,8 @@
-const container = document.getElementById('desc'),
+const desc = document.getElementById('desc'),
     complexity = document.getElementById('complexity'),
     algos = document.getElementsByClassName('algo'),
-    navbar = document.querySelectorAll('#navbar li *');
+    navbar = document.querySelectorAll('#navbar li *'),
+    container = document.getElementById('container');
 
 let stop = false;
 
@@ -23,6 +24,11 @@ window.onload = () => {
 };
 
 run.onclick = () => {
+    if (!valid_range(parseInt(range.value))) {
+        range.value = search_valid_range();
+        reload_bars(search_valid_range());
+    }
+
     buttons({disable: true});
     eval(get_algo() + '.run()').then((val) => {
         let breaked = false;
@@ -42,5 +48,20 @@ shuffle.onclick = () => {
 };
 
 range.oninput = () => {
-    reload_bars();
+    while (range.value < container.childElementCount) {
+        container.removeChild(container.lastChild);
+    }
+    if (range.value > container.childElementCount) {
+        let sizes = [...container.children].map((x) => {
+            parseFloat(x.style.height.slice(0, -1));
+        });
+        while (range.value > container.childElementCount) {
+            let n;
+            do {
+                n = Math.random() * 100;
+            } while (sizes.includes(n));
+            sizes.push(n);
+            B.element(n);
+        }
+    }
 };

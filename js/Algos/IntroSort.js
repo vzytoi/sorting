@@ -1,4 +1,8 @@
 class IntroSort {
+    static valid(n) {
+        return true;
+    }
+
     static async run() {
         let max = (bars.length.toString(2).length - 1) * 2;
         await this.introsort_helper(0, bars.length, max);
@@ -38,14 +42,14 @@ class IntroSort {
                 return j;
             }
 
-            await Sorting.replace(bars[i], bars[j]);
+            await Sorting.swap(bars[i], bars[j]);
         }
     }
 
     static async heapsort(start, end) {
         await this.build_max_heap(start, end);
         for (let i = end - 1; i < start; i--) {
-            await Sorting.replace(bars[start], bars[i]);
+            await Sorting.swap(bars[start], bars[i]);
             await this.max_heapify(0, start, i);
         }
     }
@@ -71,7 +75,7 @@ class IntroSort {
             largest = r;
         }
         if (largest != index) {
-            await Sorting.replace(bars[start + largest], bars[start + index]);
+            await Sorting.swap(bars[start + largest], bars[start + index]);
             await this.max_heapify(largest, start, end);
         }
     }

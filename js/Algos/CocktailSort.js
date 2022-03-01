@@ -1,4 +1,8 @@
 class CocktailSort {
+    static valid(n) {
+        return true;
+    }
+
     static async run() {
         let start = 0,
             end = bars.length,

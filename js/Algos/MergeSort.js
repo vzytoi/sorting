@@ -1,4 +1,8 @@
 class MergeSort {
+    static valid() {
+        return true;
+    }
+
     static async run() {
         let g = 2,
             c = 0,
@@ -41,7 +45,7 @@ class MergeSort {
             for (let j = 0; j < n - 1; j++) {
                 t = low + j;
                 if (Sorting.compare(bars[t], bars[t + 1])) {
-                    await Sorting.replace(bars[t], bars[t + 1]);
+                    await Sorting.swap(bars[t], bars[t + 1]);
                 }
                 if (stop) return;
             }

@@ -1,4 +1,8 @@
 class HeapSort {
+    static valid(n) {
+        return true;
+    }
+
     static async heapRoot(len, b, i) {
         let l = 2 * i + 1,
             r = 2 * i + 2,
@@ -13,7 +17,7 @@ class HeapSort {
         }
 
         if (max != i) {
-            await Sorting.replace(b[i], b[max], true);
+            await Sorting.swap(b[i], b[max], true);
             await this.heapRoot(len, b, max);
         }
         return bars;
@@ -28,7 +32,7 @@ class HeapSort {
         }
 
         for (let i = n - 1; i > 0; --i) {
-            await Sorting.replace(bars[0], bars[i], true);
+            await Sorting.swap(bars[0], bars[i], true);
             n--;
             await this.heapRoot(n, bars, 0);
             if (stop) {

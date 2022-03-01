@@ -4,9 +4,9 @@ class Bars {
         this.nb = nb;
     }
 
-    element(height, bnb) {
+    element(height) {
         let div = document.createElement('div');
-        div.style.height = (height * 100) / bnb + '%';
+        div.style.height = height + '%';
         this.container.appendChild(div);
     }
 
@@ -15,10 +15,10 @@ class Bars {
             n;
         for (let i = 0; i < nb; ++i) {
             do {
-                n = Math.random() * nb + 1;
+                n = Math.random() * 100;
             } while (h.includes(n));
             h.push(n);
-            this.element(n, range.value);
+            this.element(n);
         }
         return this.container.children;
     }
@@ -29,7 +29,7 @@ class Bars {
         }
     }
 
-    reload(nb = range.value) {
+    reload(nb) {
         this.clear();
         this.set(nb);
     }

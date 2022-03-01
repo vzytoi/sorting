@@ -1,4 +1,8 @@
 class CombSort {
+    static valid(n) {
+        return true;
+    }
+
     static async run() {
         let gap = bars.length,
             n = bars.length,
@@ -10,7 +14,7 @@ class CombSort {
             swapped = false;
             for (let i = 0; i < n - gap; ++i) {
                 if (Sorting.compare(bars[i], bars[i + gap])) {
-                    await Sorting.replace(bars[i], bars[i + gap]);
+                    await Sorting.swap(bars[i], bars[i + gap]);
                     swapped = true;
                 }
                 if (stop) return;

@@ -25,7 +25,7 @@ class Sorting {
         });
     }
 
-    static async replace(a, b, both = true) {
+    static async swap(a, b, both = true) {
         if (a == undefined || b == undefined) {
             return false;
         }
