@@ -1,0 +1,135 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+#navbar,
+#navbar-algo {
+    width: 100%;
+}
+
+#navbar {
+    height: 60px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.35);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#navbar ul {
+    width: 50%;
+    height: 100%;
+    list-style: none;
+}
+
+#navbar ul:first-child {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#navbar ul:last-child {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+#navbar ul li {
+    margin: 0 1vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+#navbar-algo {
+    height: 50px;
+    box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.3);
+    overflow-x: default;
+}
+
+#navbar-algo ul {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    list-style: none;
+}
+
+#navbar-algo ul {
+    justify-content: space-around;
+}
+
+.algo {
+    cursor: pointer;
+    padding-bottom: 2px;
+}
+
+.algo.checked {
+    border-bottom: 2px solid black;
+    margin-top: 2px;
+}
+
+.algo:hover:not(.checked) {
+    border-bottom: 2px solid lightgray;
+    margin-top: 2px;
+}
+
+#container {
+    width: 100%;
+    height: calc(100vh - 50px - 60px - 6vh);
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 6vh;
+}
+
+#container div {
+    background: rgb(128, 128, 128);
+    flex-grow: 1;
+    margin: 0 0.04vw;
+}
+
+.btn {
+    padding: 4px 15px;
+    border: 2px solid black;
+    background: transparent;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+#run {
+    background: black;
+    color: white;
+}
+
+.btn:hover {
+    background: black;
+    color: white;
+}
+
+#infos {
+    margin-top: 3vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#desc {
+    text-align: center;
+    width: 50%;
+    font-size: 1vw;
+}
+
+/* #complexity th,
+#complexity td {
+    border-bottom: 2px solid black;
+}
+
+#complexity th {
+    border-right: 2px solid black;
+} */
