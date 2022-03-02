@@ -11,7 +11,7 @@ class BubbleSort {
                     if (stop) {
                         break;
                     }
-                    await Sorting.replace(bars[j], bars[j + 1]);
+                    await Sorting.swap(bars[j], bars[j + 1]);
                 }
             }
         }

@@ -4,22 +4,24 @@ class Bars {
         this.nb = nb;
     }
 
-    element(height) {
+    element(height, append = true) {
         let div = document.createElement('div');
         div.style.height = height + '%';
-        this.container.appendChild(div);
+        if (append) {
+            this.container.append(div);
+        } else this.container.prepend(div);
     }
 
     set(nb) {
-        let h = [],
-            n;
+        let n;
         for (let i = 0; i < nb; ++i) {
             do {
-                n = Math.random() * 100;
-            } while (h.includes(n));
-            h.push(n);
+                n = parseFloat((Math.random() * 100).toFixed(2));
+            } while (sizes.includes(n));
+            sizes.push(n);
             this.element(n);
         }
+
         return this.container.children;
     }
 
@@ -30,10 +32,12 @@ class Bars {
     }
 
     reload(nb) {
+        sizes = [];
         this.clear();
         this.set(nb);
     }
 }
 
 let B = new Bars(container, range.value),
+    sizes = [],
     bars = B.set(range.value);

@@ -16,7 +16,7 @@ class BitonicSort {
                         (((i & k) == 0 && Sorting.compare(bars[i], bars[l])) ||
                             ((i & k) != 0 && !Sorting.compare(bars[i], bars[l])))
                     )
-                        await Sorting.replace(bars[i], bars[l]);
+                        await Sorting.swap(bars[i], bars[l]);
                 }
             }
         }

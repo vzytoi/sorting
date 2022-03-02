@@ -12,7 +12,7 @@ class CocktailSort {
             swapped = false;
             for (let i = start; i < end - 1; ++i) {
                 if (Sorting.compare(bars[i], bars[i + 1])) {
-                    await Sorting.replace(bars[i], bars[i + 1]);
+                    await Sorting.swap(bars[i], bars[i + 1]);
                     swapped = true;
                     if (stop) return;
                 }
@@ -25,7 +25,7 @@ class CocktailSort {
 
             for (let i = end - 1; i > start; --i) {
                 if (Sorting.compare(bars[i - 1], bars[i])) {
-                    await Sorting.replace(bars[i], bars[i - 1]);
+                    await Sorting.swap(bars[i], bars[i - 1]);
                     swapped = true;
                     if (stop) return;
                 }

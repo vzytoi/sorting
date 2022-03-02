@@ -3,53 +3,34 @@ class MergeSort {
         return true;
     }
 
-    static async run() {
-        let g = 2,
-            c = 0,
-            s = false,
-            n = bars.length;
+    static async run(start = 0, end = bars.length) {
+        if (start >= end - 1) return;
+        var mid = start + ~~((end - start) / 2);
 
-        while (true) {
-            while (c < n) {
-                if (stop) return;
-                if (bars[c + g] == undefined) {
-                    await MergeSort.flatMerge(c, n);
-                } else {
-                    await MergeSort.flatMerge(c, c + g);
-                }
-                c += g;
+        await this.run(start, mid);
+        await this.run(mid, end);
+
+        var cache = Array(end - start).fill(bars[0]);
+        var k = mid;
+
+        for (var i = start, r = 0; i < mid; r++, i++) {
+            if (stop) return;
+            while (k < end && Sorting.compare(bars[i], bars[k])) {
+                cache[r] = Sorting.value(bars[k]);
+                r++;
+                k++;
             }
+            cache[r] = Sorting.value(bars[i]);
+        }
 
-            c = 0;
-
-            if (g * 2 > n) {
-                g = n;
-                if (s) break;
-                s = true;
-            } else {
-                g *= 2;
-            }
+        for (var i = 0; i < k - start; i++) {
+            if (stop) return;
+            await Sorting.swap(bars[i + start], cache[i], false);
         }
 
         new Promise((resolve, reject) => {
             resolve(bars);
         });
-    }
-
-    static async flatMerge(low, high) {
-        let seq = [...bars].slice(low, high),
-            n = seq.length,
-            t;
-
-        for (let i = 0; i < n; i++) {
-            for (let j = 0; j < n - 1; j++) {
-                t = low + j;
-                if (Sorting.compare(bars[t], bars[t + 1])) {
-                    await Sorting.swap(bars[t], bars[t + 1]);
-                }
-                if (stop) return;
-            }
-        }
     }
 
     static desc() {

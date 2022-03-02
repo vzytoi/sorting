@@ -82,6 +82,10 @@ body {
 
 #container {
     width: 100%;
+    /* width: 95%; */
+    /* position: relative; */
+    /* left: 50%; */
+    /* transform: translate(-50%); */
     height: calc(100vh - 50px - 60px - 6vh);
     display: flex;
     justify-content: center;
@@ -92,8 +96,12 @@ body {
 #container div {
     background: rgb(128, 128, 128);
     flex-grow: 1;
-    margin: 0 0.04vw;
+    /* margin: 0 0.04vw; */
 }
+
+/* #container div:hover {
+    background: darkgray !important;
+} */
 
 .btn {
     padding: 4px 15px;

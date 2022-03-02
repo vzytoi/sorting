@@ -1,12 +1,14 @@
-const desc = document.getElementById('desc'),
-    complexity = document.getElementById('complexity'),
-    algos = document.getElementsByClassName('algo'),
+const algos = document.getElementsByClassName('algo'),
     navbar = document.querySelectorAll('#navbar li *'),
     container = document.getElementById('container');
 
-let stop = false;
+let stop = false,
+    speed_value = calcSpeed(),
+    count = 0;
 
-for (let el of navbar) window[el.id] = el;
+for (let el of navbar) {
+    window[el.id] = el;
+}
 
 for (let algo of algos) {
     source(algo.innerHTML.replaceAll(' ', ''));
@@ -24,22 +26,23 @@ window.onload = () => {
 };
 
 run.onclick = () => {
-    if (!valid_range(parseInt(range.value))) {
-        range.value = search_valid_range();
-        reload_bars(search_valid_range());
+    count++;
+
+    if (!valid_range(range.value)) {
+        let valid = search_valid_range();
+
+        range.value = valid;
+        reload_bars(valid);
     }
 
     buttons({disable: true});
-    eval(get_algo() + '.run()').then((val) => {
-        let breaked = false;
-        shuffle.addEventListener('click', () => {
-            breaked = true;
-        });
+    eval(get_algo() + '.run()').then(() => {
+        let current = count;
         setTimeout(() => {
-            if (!breaked) {
+            if (!stop && current == count) {
                 reload_bars();
             }
-        }, 2500);
+        }, 1000);
     });
 };
 
@@ -47,21 +50,26 @@ shuffle.onclick = () => {
     reload_bars();
 };
 
+speed.oninput = () => {
+    speed_value = calcSpeed();
+};
+
 range.oninput = () => {
     while (range.value < container.childElementCount) {
         container.removeChild(container.lastChild);
+        container.removeChild(container.firstChild);
+        sizes.splice(-2);
     }
     if (range.value > container.childElementCount) {
-        let sizes = [...container.children].map((x) => {
-            parseFloat(x.style.height.slice(0, -1));
-        });
         while (range.value > container.childElementCount) {
-            let n;
-            do {
-                n = Math.random() * 100;
-            } while (sizes.includes(n));
-            sizes.push(n);
-            B.element(n);
+            for (let i = 0; i < parseInt(range.step); i++) {
+                let n;
+                do {
+                    n = parseFloat((Math.random() * 100).toFixed(2));
+                } while (sizes.includes(n));
+                sizes.push(n);
+                B.element(n, i % 2 == 0);
+            }
         }
     }
 };

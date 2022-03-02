@@ -70,6 +70,11 @@ function source(name) {
     document.body.appendChild(inc);
 }
 
+function timer(lap) {
+    if (lap) console.log(`${lap} in: ${(performance.now() - timer.prev).toFixed(3)}ms`);
+    timer.prev = performance.now();
+}
+
 /*
  * Vérifie que le nombre n vérifie
  * les restriction de l'algorithme par exemple
@@ -85,16 +90,17 @@ function valid_range(n) {
  */
 function search_valid_range() {
     let n = parseInt(range.value),
-        r = range.value == range.max ? false : n + 1,
-        l = range.value == range.min ? false : n - 1;
+        r = n + 1,
+        l = n - 1;
     while (!valid_range(r) && !valid_range(l)) {
-        if (!r) {
-            l--;
-        } else if (!l) {
-            r++;
-        } else if (Math.abs(n - r) >= Math.abs(n - l)) {
+        if (n == range.max || Math.abs(n - r) >= Math.abs(n - l)) {
             l--;
         } else r++;
     }
+
     return valid_range(r) ? r : l;
+}
+
+function calcSpeed() {
+    return Math.abs(speed.value - speed.max);
 }
