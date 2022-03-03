@@ -1,9 +1,9 @@
-class BitonicSort {
-    static valid(n) {
+window.BitonicSort = {
+    valid: (n) => {
         return Number.isInteger(Math.log(n) / Math.log(2));
-    }
+    },
 
-    static async run() {
+    run: async () => {
         let n = bars.length,
             l;
         for (let k = 2; k <= n; k *= 2) {
@@ -20,5 +20,5 @@ class BitonicSort {
                 }
             }
         }
-    }
-}
+    },
+};

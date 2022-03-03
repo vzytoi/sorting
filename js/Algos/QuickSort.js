@@ -1,9 +1,9 @@
-class QuickSort {
-    static valid(n) {
+window.QuickSort = {
+    valid: (n) => {
         return true;
-    }
+    },
 
-    static async run(left = 0, right = bars.length - 1) {
+    run: (left = 0, right = bars.length - 1) => {
         if (left < right) {
             let p = left,
                 i = left,
@@ -23,11 +23,11 @@ class QuickSort {
                 }
             }
             await Sorting.swap(bars[p], bars[j]);
-            await this.run(left, j - 1);
-            await this.run(j + 1, right);
+            await QuickSort.run(left, j - 1);
+            await QuickSort.run(j + 1, right);
         }
-        new Promise((resolve, reject) => {
+        new Promise((resolve) => {
             resolve(bars);
         });
-    }
-}
+    },
+};

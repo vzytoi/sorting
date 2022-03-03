@@ -1,9 +1,9 @@
-class CocktailSort {
-    static valid(n) {
+window.CocktailSort = {
+    valid: (n) => {
         return true;
-    }
+    },
 
-    static async run() {
+    run: async () => {
         let start = 0,
             end = bars.length,
             swapped = true;
@@ -34,8 +34,8 @@ class CocktailSort {
             start++;
         }
 
-        new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(bars);
         });
-    }
-}
+    },
+};

@@ -1,9 +1,9 @@
-class InsertionSort {
-    static valid(n) {
+window.InsertionSort = {
+    valid: (n) => {
         return true;
-    }
+    },
 
-    static async run() {
+    run: async () => {
         let n = bars.length,
             j;
         for (let i = 1; i < n; ++i) {
@@ -14,8 +14,8 @@ class InsertionSort {
                 if (stop) return;
             }
         }
-        new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(bars);
         });
-    }
-}
+    },
+};

@@ -1,9 +1,9 @@
-class HeapSort {
-    static valid(n) {
+window.HeapSort = {
+    valid: (n) => {
         return true;
-    }
+    },
 
-    static async heapRoot(len, b, i) {
+    heapRoot: async (len, b, i) => {
         let l = 2 * i + 1,
             r = 2 * i + 2,
             max = i;
@@ -18,29 +18,29 @@ class HeapSort {
 
         if (max != i) {
             await Sorting.swap(b[i], b[max], true);
-            await this.heapRoot(len, b, max);
+            await HeapSort.heapRoot(len, b, max);
         }
         return bars;
-    }
+    },
 
-    static async run() {
+    run: async () => {
         let n = bars.length;
 
         for (let i = Math.floor(n / 2); i >= 0; --i) {
             if (stop) return;
-            await this.heapRoot(n, bars, i);
+            await HeapSort.heapRoot(n, bars, i);
         }
 
         for (let i = n - 1; i > 0; --i) {
             await Sorting.swap(bars[0], bars[i], true);
             n--;
-            await this.heapRoot(n, bars, 0);
+            await HeapSort.heapRoot(n, bars, 0);
             if (stop) {
                 return;
             }
         }
-        new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(bars);
         });
-    }
-}
+    },
+};

@@ -15,10 +15,15 @@ class Sorting {
     static color(bar, colors) {
         if (typeof colors == 'string') {
             colors = new Array(bar.length).fill(colors);
+            var tmp = bar.map((x) => window.getComputedStyle(x).backgroundColor);
         }
 
         for (let i = 0; i < bar.length; i++) {
             bar[i].style.background = colors[i];
+        }
+
+        if (tmp != undefined) {
+            return tmp;
         }
     }
 
@@ -29,30 +34,26 @@ class Sorting {
     }
 
     static async swap(a, b, both = true) {
-        let changed;
-
         if (both) {
             if (this.validate_bars(a, b)) {
                 [a.style.height, b.style.height] = [b.style.height, a.style.height];
-                changed = [a, b];
+                var changed = [a, b];
             }
         } else {
             if (this.validate_bars(a, b)) {
                 a.style.height = b.style.height;
-                changed = [a];
+                var changed = [a];
             } else {
                 a.style.height = b + 'px';
-                changed = [a];
+                var changed = [a];
             }
         }
 
-        let colors = changed.map((x) => window.getComputedStyle(x).backgroundColor);
+        replace.innerHTML = parseInt(replace.innerHTML) + (both ? 2 : 1);
 
-        this.color(changed, 'red');
+        let colors = this.color(changed, 'red');
         await this.sleep();
         this.color(changed, colors);
-
-        replace.innerHTML = parseInt(replace.innerHTML) + (both ? 2 : 1);
     }
 
     static compare(a, b) {

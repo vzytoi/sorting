@@ -1,9 +1,9 @@
-class OddEvenSort {
-    static valid(n) {
+window.OddEvenSort = {
+    valid: (n) => {
         return true;
-    }
+    },
 
-    static async run() {
+    run: async () => {
         let ok = false,
             n = bars.length;
 
@@ -27,8 +27,8 @@ class OddEvenSort {
             }
         }
 
-        new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(bars);
         });
-    }
-}
+    },
+};

@@ -1,9 +1,9 @@
-class SelectionSort {
-    static valid(n) {
+window.SelectionSort = {
+    valid: (n) => {
         return true;
-    }
+    },
 
-    static async run() {
+    run: async () => {
         let m,
             n = bars.length;
         for (let i = 0; i < n; i++) {
@@ -18,8 +18,8 @@ class SelectionSort {
             }
             await Sorting.swap(bars[i], bars[m], true);
         }
-        new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(bars);
         });
-    }
-}
+    },
+};

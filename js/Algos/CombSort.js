@@ -1,9 +1,9 @@
-class CombSort {
-    static valid(n) {
+window.CombSort = {
+    valid: (n) => {
         return true;
-    }
+    },
 
-    static async run() {
+    run: async () => {
         let gap = bars.length,
             n = bars.length,
             swapped = true;
@@ -21,8 +21,8 @@ class CombSort {
             }
         }
 
-        new Promise((resolve, reject) => {
+        return new Promise((resolve) => {
             resolve(bars);
         });
-    }
-}
+    },
+};

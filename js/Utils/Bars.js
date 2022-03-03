@@ -10,15 +10,19 @@ class Bars {
         if (append) {
             this.container.append(div);
         } else this.container.prepend(div);
+        sizes.push(height);
+    }
+
+    size() {
+        return (Math.random() * 100).toFixed(2);
     }
 
     set(nb) {
         let n;
         for (let i = 0; i < nb; ++i) {
             do {
-                n = parseFloat((Math.random() * 100).toFixed(2));
+                n = this.size();
             } while (sizes.includes(n));
-            sizes.push(n);
             this.element(n);
         }
 
@@ -26,7 +30,7 @@ class Bars {
     }
 
     clear() {
-        while (this.container.firstChild) {
+        while (this.container.hasChildNodes()) {
             this.container.firstChild.remove();
         }
     }
