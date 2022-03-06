@@ -1,9 +1,9 @@
 window.CocktailSort = {
-    valid: (n) => {
+    valid: _ => {
         return true;
     },
 
-    run: async () => {
+    run: async function* () {
         let start = 0,
             end = bars.length,
             swapped = true;
@@ -11,30 +11,28 @@ window.CocktailSort = {
         while (swapped) {
             swapped = false;
             for (let i = start; i < end - 1; ++i) {
-                if (Sorting.compare(bars[i], bars[i + 1])) {
-                    await Sorting.swap(bars[i], bars[i + 1]);
+                if (Sorting.compare(i, i + 1)) {
+                    yield* Sorting.reflect_state();
+                    await Sorting.swap(i, i + 1);
                     swapped = true;
-                    if (stop) return;
                 }
             }
 
             end--;
-            if (!swapped) break;
-            if (stop) return;
             swapped = false;
 
             for (let i = end - 1; i > start; --i) {
-                if (Sorting.compare(bars[i - 1], bars[i])) {
-                    await Sorting.swap(bars[i], bars[i - 1]);
+                if (Sorting.compare(bars[i - 1], i)) {
+                    yield* Sorting.reflect_state();
+                    await Sorting.swap(i, bars[i - 1]);
                     swapped = true;
-                    if (stop) return;
                 }
             }
 
             start++;
         }
 
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             resolve(bars);
         });
     },

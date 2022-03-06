@@ -4,16 +4,22 @@
         <title>Cyprien Henner</title>
         <link rel="stylesheet" href="css/main.css" />
         <meta charset="UTF-8" />
-        <link rel="icon" type="image/svg+xml" href="img/favicon.svg" />
+        <link
+            rel="icon"
+            type="image/svg+xml"
+            href="img/favicon.svg"
+        />
     </head>
     <body>
-        <div id="navbar">
+        <nav id="global-navbar">
             <ul>
                 <li>
-                    <button id="run" class="dis btn">Lancer</button>
+                    <button id="run" class="btn">
+                        <img id="run-icon" src="img/play.svg"></img>
+                    </button>
                 </li>
                 <li>
-                    <button class="btn" id="shuffle">Mélanger</button>
+                    <button id="shuffle" class="btn">Mélanger</button>
                 </li>
                 <li>
                     <label for="range">Nombre de barres</label>
@@ -29,15 +35,22 @@
                 </li>
                 <li>
                     <label for="speed">Vitesse</label>
-                    <input min="1" type="range" value="70" max="100" id="speed" />
+                    <input
+                        min="1"
+                        type="range"
+                        value="70"
+                        max="100"
+                        id="speed"
+                    />
                 </li>
             </ul>
-            <ul>
+            <ul id="data">
                 <li><span id="compare">0</span> comparaisons</li>
                 <li><span id="replace">0</span> affectations</li>
+                <li><span id="total">0</span> total</li>
             </ul>
-        </div>
-        <div id="navbar-algo">
+        </nav>
+        <nav id="navbar-algo">
             <ul>
                 <li class="algo">Heap Sort</li>
                 <li id="checked" class="algo">Merge Sort</li>
@@ -50,8 +63,8 @@
                 <li class="algo">Bitonic Sort</li>
                 <li class="algo">Odd Even Sort</li>
             </ul>
-        </div>
-        <div id="container"></div>
+        </nav>
+        <main id="container"></main>
 
         <script src="js/Utils/Bars.js"></script>
         <script src="js/Utils/Sorting.js"></script>

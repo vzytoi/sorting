@@ -1,45 +1,44 @@
 window.HeapSort = {
-    valid: (n) => {
+    valid: _ => {
         return true;
     },
 
-    heapRoot: async (len, b, i) => {
+    heapRoot: async function* (len, b, i) {
         let l = 2 * i + 1,
             r = 2 * i + 2,
             max = i;
 
-        if (l < len && Sorting.compare(b[l], b[max], true)) {
+        if (l < len && Sorting.compare(b[l], b[max])) {
             max = l;
         }
 
-        if (r < len && Sorting.compare(b[r], b[max], true)) {
+        if (r < len && Sorting.compare(b[r], b[max])) {
             max = r;
         }
 
+        yield* Sorting.reflect_state();
+
         if (max != i) {
-            await Sorting.swap(b[i], b[max], true);
-            await HeapSort.heapRoot(len, b, max);
+            await Sorting.swap(b[i], b[max]);
+            yield* await HeapSort.heapRoot(len, b, max);
         }
-        return bars;
     },
 
-    run: async () => {
+    run: async function* () {
         let n = bars.length;
 
         for (let i = Math.floor(n / 2); i >= 0; --i) {
-            if (stop) return;
-            await HeapSort.heapRoot(n, bars, i);
+            yield* await HeapSort.heapRoot(n, bars, i);
         }
 
         for (let i = n - 1; i > 0; --i) {
-            await Sorting.swap(bars[0], bars[i], true);
             n--;
-            await HeapSort.heapRoot(n, bars, 0);
-            if (stop) {
-                return;
-            }
+
+            yield* Sorting.reflect_state();
+            await Sorting.swap(0, i);
+            yield* await HeapSort.heapRoot(n, bars, 0);
         }
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             resolve(bars);
         });
     },

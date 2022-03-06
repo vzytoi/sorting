@@ -1,9 +1,9 @@
 window.OddEvenSort = {
-    valid: (n) => {
+    valid: _ => {
         return true;
     },
 
-    run: async () => {
+    run: async function* () {
         let ok = false,
             n = bars.length;
 
@@ -11,23 +11,23 @@ window.OddEvenSort = {
             ok = true;
 
             for (let i = 1; i <= n - 2; i += 2) {
-                if (Sorting.compare(bars[i], bars[i + 1])) {
-                    await Sorting.swap(bars[i], bars[i + 1]);
+                if (Sorting.compare(i, i + 1)) {
+                    await Sorting.swap(i, i + 1);
                     ok = false;
                 }
-                if (stop) return;
+                yield* Sorting.reflect_state();
             }
 
             for (let i = 0; i <= n - 2; i += 2) {
-                if (Sorting.compare(bars[i], bars[i + 1])) {
-                    await Sorting.swap(bars[i], bars[i + 1]);
+                if (Sorting.compare(i, i + 1)) {
+                    await Sorting.swap(i, i + 1);
                     ok = false;
                 }
-                if (stop) return;
+                yield* Sorting.reflect_state();
             }
         }
 
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             resolve(bars);
         });
     },

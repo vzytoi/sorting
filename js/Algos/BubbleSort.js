@@ -1,21 +1,19 @@
 window.BubbleSort = {
-    valid: (n) => {
+    valid: _ => {
         return true;
     },
 
-    run: async () => {
+    run: async function* () {
         let l = bars.length;
-        for (let i = 0; i < l; i++) {
-            for (let j = 0; j < l - 1; j++) {
-                if (Sorting.compare(bars[j], bars[j + 1])) {
-                    if (stop) {
-                        break;
-                    }
-                    await Sorting.swap(bars[j], bars[j + 1]);
+        for (var i = 0; i < l; i++) {
+            for (var j = 0; j < l - 1; j++) {
+                if (Sorting.compare(j, j + 1)) {
+                    yield* Sorting.reflect_state();
+                    await Sorting.swap(j, j + 1);
                 }
             }
         }
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             resolve(bars);
         });
     },

@@ -3,37 +3,30 @@ window.MergeSort = {
         return true;
     },
 
-    run: async (start = 0, end = bars.length) => {
+    run: async function* (start = 0, end = bars.length) {
         if (start >= end - 1) {
             return;
         }
-        let mid = start + ~~((end - start) / 2),
-            cache = Array(end - start).fill(bars[0]),
-            k = mid;
 
-        await MergeSort.run(start, mid);
-        await MergeSort.run(mid, end);
+        let mid = start + ~~((end - start) / 2);
+        yield* await MergeSort.run(start, mid);
+        yield* await MergeSort.run(mid, end);
 
-        for (let i = start, r = 0; i < mid; r++, i++) {
-            if (stop) {
-                break;
+        let m;
+
+        for (let i = start; i < end; i++) {
+            m = i;
+            for (let j = i + 1; j < end; j++) {
+                if (Sorting.compare(m, j)) {
+                    m = j;
+                }
+
+                yield* Sorting.reflect_state();
             }
-            while (k < end && Sorting.compare(bars[i], bars[k])) {
-                cache[r] = Sorting.value(bars[k]);
-                r++;
-                k++;
-            }
-            cache[r] = Sorting.value(bars[i]);
+            await Sorting.swap(i, m);
         }
 
-        for (let i = 0; i < k - start; i++) {
-            if (stop) {
-                return;
-            }
-            await Sorting.swap(bars[i + start], cache[i], false);
-        }
-
-        return new Promise((resolve) => {
+        return new Promise(resolve => {
             resolve(bars);
         });
     },

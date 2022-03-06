@@ -1,32 +1,32 @@
 window.QuickSort = {
-    valid: (n) => {
+    valid: _ => {
         return true;
     },
 
-    run: (left = 0, right = bars.length - 1) => {
+    run: async function* (left = 0, right = bars.length - 1) {
         if (left < right) {
             let p = left,
                 i = left,
                 j = right;
             while (i < j) {
-                if (stop) return;
-                while (Sorting.compare(bars[p], bars[i]) && i < j) {
+                yield* Sorting.reflect_state();
+                while (Sorting.compare(p, i) && i < j) {
                     i++;
                 }
 
-                while (!Sorting.compare(bars[p], bars[j])) {
+                while (!Sorting.compare(p, j)) {
                     j--;
                 }
 
                 if (i < j) {
-                    await Sorting.swap(bars[i], bars[j]);
+                    await Sorting.swap(i, j);
                 }
             }
-            await Sorting.swap(bars[p], bars[j]);
-            await QuickSort.run(left, j - 1);
-            await QuickSort.run(j + 1, right);
+            await Sorting.swap(p, j);
+            yield* await QuickSort.run(left, j - 1);
+            yield* await QuickSort.run(j + 1, right);
         }
-        new Promise((resolve) => {
+        new Promise(resolve => {
             resolve(bars);
         });
     },
