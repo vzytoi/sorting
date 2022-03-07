@@ -95,8 +95,12 @@ body {
 }
 
 #container div {
-    background: #424242;
+    background: rgb(66, 66, 66);
     flex-grow: 1;
+}
+
+#container div:hover {
+    background: rgb(97, 97, 97) !important;
 }
 
 #container div:not(:last-child) {

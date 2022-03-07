@@ -13,6 +13,9 @@ const Sorting = {
     },
 
     color: (bar, colors) => {
+        let base = 'rgb(66, 66, 66)',
+            hover = 'rgb(97, 97, 97)';
+
         if (typeof colors == 'string') {
             colors = new Array(bar.length).fill(colors);
         } else if (!G.paused) {
@@ -29,8 +32,12 @@ const Sorting = {
         );
 
         for (let i = 0; i < bar.length; i++) {
-            if (colors[i] != null && Sorting.validate_bars(bar[i])) {
-                bar[i].style.background = colors[i];
+            if (
+                colors[i] != null &&
+                Sorting.validate_bars(bar[i])
+            ) {
+                bar[i].style.background =
+                    colors[i] == hover ? base : colors[i];
             }
         }
 
@@ -39,7 +46,10 @@ const Sorting = {
 
     sleep: () => {
         return new Promise(resolve => {
-            setTimeout(resolve, G.speed);
+            setTimeout(
+                resolve,
+                Math.abs(speed.value - speed.max)
+            );
         });
     },
 

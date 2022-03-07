@@ -19,7 +19,7 @@ const Utils = {
     reload_bars: (n = range.value) => {
         Utils.buttons({disable: false});
         __Bars.reload(n);
-        delete G.generator;
+        G.enum = false;
     },
 
     buttons: ({disable = true} = {}) => {
@@ -28,9 +28,11 @@ const Utils = {
         });
         G.stopped = !disable;
         G.paused = disable;
-        [...document.getElementById('data').children].forEach(el => {
-            el.firstChild.innerHTML = 0;
-        });
+        [...document.getElementById('data').children].forEach(
+            el => {
+                el.firstChild.innerHTML = 0;
+            }
+        );
         document.getElementById('run-icon').src = 'img/play.svg';
     },
 
@@ -58,19 +60,14 @@ const Utils = {
         }
         return c != ns.length;
     },
-
-    calcSpeed: () => {
-        return Math.abs(speed.value - speed.max);
-    },
 };
 
 let G = {
     stopped: false,
     paused: true,
-    speed: Utils.calcSpeed(),
     count: 0,
     curr: {},
-    generator: null,
+    enum: false,
 };
 
 for (let algo of algos) {
@@ -90,7 +87,7 @@ for (let algo of algos) {
 run.onclick = () => {
     G.count++;
 
-    if (G.generator == null) {
+    if (!G.enum) {
         if (!Utils.valid_range(range.value)) {
             const valid = (function () {
                 let n = parseInt(range.value),
@@ -114,14 +111,13 @@ run.onclick = () => {
     }
 
     if (G.paused) {
-        if (G.generator != null) {
+        if (G.enum) {
             Sorting.color(G.curr.bars, G.curr.colors);
-        }
+        } else G.enum = window[Utils.get_algo()].run();
 
-        G.generator ||= window[Utils.get_algo()].run();
         G.paused = false;
 
-        G.generator
+        G.enum
             .next()
             .then(status => {
                 let current = G.count;
@@ -148,10 +144,6 @@ run.onclick = () => {
 
 shuffle.onclick = () => {
     Utils.reload_bars();
-};
-
-speed.oninput = () => {
-    G.speed = Utils.calcSpeed();
 };
 
 range.oninput = () => {

@@ -9,6 +9,7 @@ window.MergeSort = {
         }
 
         let mid = start + ~~((end - start) / 2);
+
         yield* await MergeSort.run(start, mid);
         yield* await MergeSort.run(mid, end);
 
