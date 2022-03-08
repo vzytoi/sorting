@@ -1,3 +1,8 @@
+Options +SymLinksIfOwnerMatch
 RewriteEngine On
+
 RewriteCond %{SERVER_PORT} !=443
 RewriteRule ^(.*)$ https://cyprien-henner.com/$1 [R=301,L]
+
+RewriteCond %{HTTP_HOST} ^www.cyprien-henner.com
+RewriteRule (.*) https://cyprien-henner.com/$1 [R=301,L]
