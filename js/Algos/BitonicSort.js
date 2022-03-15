@@ -18,8 +18,10 @@ window.BitonicSort = {
                     l = i ^ j;
                     if (
                         l > i &&
-                        (((i & k) == 0 && Sorting.compare(i, l)) ||
-                            ((i & k) != 0 && !Sorting.compare(i, l)))
+                        (((i & k) == 0 &&
+                            Sorting.compare(i, l)) ||
+                            ((i & k) != 0 &&
+                                !Sorting.compare(i, l)))
                     )
                         await Sorting.swap(i, l);
                 }

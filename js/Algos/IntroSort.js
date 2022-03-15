@@ -68,14 +68,26 @@ class IntroSort {
             l = 2 * index + 1,
             r = 2 * index + 2,
             largest = index;
-        if (l < size && Sorting.compare(bars[start + l], bars[start + index])) {
+        if (
+            l < size &&
+            Sorting.compare(bars[start + l], bars[start + index])
+        ) {
             largest = 1;
         }
-        if (r < size && Sorting.compare(bars[start + r], bars[start + largest])) {
+        if (
+            r < size &&
+            Sorting.compare(
+                bars[start + r],
+                bars[start + largest]
+            )
+        ) {
             largest = r;
         }
         if (largest != index) {
-            await Sorting.swap(bars[start + largest], bars[start + index]);
+            await Sorting.swap(
+                bars[start + largest],
+                bars[start + index]
+            );
             await this.max_heapify(largest, start, end);
         }
     }

@@ -6,6 +6,17 @@
     <link rel="stylesheet" href="css/main.css" />
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="img/favicon.svg" />
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M5KY37Z3X5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'G-M5KY37Z3X5');
+    </script>
 </head>
 
 <body>
@@ -21,7 +32,7 @@
             </li>
             <li>
                 <label for="range">Size</label>
-                <input min="5" type="range" value="175" step="2" max="256" class="dis" id="range" />
+                <input min="5" type="range" value="100" step="2" max="256" class="dis" id="range" />
             </li>
             <li>
                 <label for="speed">Speed</label>

@@ -17,7 +17,9 @@ class Bars {
         let min = 5,
             max = 100;
 
-        return (Math.random() * (max - min + 1) + min).toFixed(2);
+        return (Math.random() * (max - min + 1) + min).toFixed(
+            2
+        );
     }
 
     set(nb) {
